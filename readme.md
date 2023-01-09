@@ -1,21 +1,28 @@
 # Simple http server in Golang
 
-### build a script
+### Description
+The main.go file to run the httpserver reqeust with a simple hello route to listen on port 8080
+and run the server with the command
 
-if it requires perssion then 
+```go run main.go``` 
+
+In scripts folder build.sh and run.sh to build and run the program with the command
+
+#### Build
+
+```./scripts/build.sh``` 
+
+If permission is required then
 
 ```chmod +x scripts/build.sh```
 
-then type
+#### Run
 
-```scripts/build.sh```
+```./scripts/run.sh```
 
-### run a shel to run the program
-
-Sometimes permission requires
+If permission is required then
 
 ```chmod +x scripts/run.sh```
 
-then
-
-```scripts/run.sh```
+### Author 
+* **Abdullah Abid** - *Initial work* - [abidkhan03]
