@@ -6,6 +6,11 @@ and run the server with the command
 
 ```go run main.go``` 
 
+If Go is not installed then
+
+```sudo apt-get install golang-go```
+
+
 In scripts folder build.sh and run.sh to build and run the program with the command
 
 #### Build
