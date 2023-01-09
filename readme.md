@@ -30,4 +30,4 @@ If permission is required then
 ```chmod +x scripts/run.sh```
 
 ### Author 
-* **Abdullah Abid** *
+* **Abdullah Abid** 
