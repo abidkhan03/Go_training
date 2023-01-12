@@ -29,5 +29,11 @@ If permission is required then
 
 ```chmod +x scripts/run.sh```
 
+
+##### Run the change Library route in f/api-42 branch
+
+```go run ./change_route/```
+
+
 ### Author 
 * **Abdullah Abid** - *Initial work* - [abidkhan03]
