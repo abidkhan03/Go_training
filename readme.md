@@ -29,5 +29,15 @@ If permission is required then
 
 ```chmod +x scripts/run.sh```
 
+##### Run the parse file in f/training-55 branch
+
+go to the parse_csv folder and then 
+
+```go run parse.go <path to csv>```
+
+```go run parse.go /home/Desktop/record.csv```
+
+you can pass your path 
+
 ### Author 
 * **Abdullah Abid** 
