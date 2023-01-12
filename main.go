@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
 	"github.com/go-chi/chi/v5"
+	"fmt"
 )
 
 type Request struct {
@@ -34,5 +34,6 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
+	fmt.Println("Server is running on port 8000")
 	http.ListenAndServe(":8000", r)
 }
