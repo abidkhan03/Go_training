@@ -2,10 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
-	"github.com/go-chi/chi/v5"
 )
 
 type Request struct {
@@ -30,10 +28,4 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(response)
 }
-const port = "8000"
-func main() {
-	r := chi.NewRouter()
-	r.Post("/hello", HelloHandler)
-	fmt.Println("Server is running on port ", port)
-	http.ListenAndServe(port, r)
-}
+
