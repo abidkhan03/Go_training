@@ -1,16 +1,19 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
+
+	"github.com/abidkhan03/go_training/handler"
+	"github.com/go-chi/chi/v5"
 )
 
-func main() {
-	http.HandleFunc("/hello", HelloHandler)
-	fmt.Println("running server ")
-	http.ListenAndServe(":8080", nil)
-}
+const PORT = ":8000"
 
-func HelloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, %s!\n", r.URL.Path[1:])
+func main() {
+	r := chi.NewRouter()
+	r.Post("/hello", handler.HelloHandler)
+
+	log.Println("Server is running on port ", PORT)
+	log.Println(http.ListenAndServe(PORT, r))
 }
