@@ -2,7 +2,7 @@ package handler
 
 import (
 	"encoding/json"
-	"io"
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -19,20 +19,16 @@ type Response struct {
 
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
 	var req Request
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		return 
 	}
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-		}
-	}(r.Body)
 
 	response := &Response{
-		Code:      200,
-		Message:   "Welcome " + req.Name + "!",
+		Code:      http.StatusOK,
+		Message:   fmt.Sprintf("Welcome %s!", req.Name),
 		Timestamp: time.Now().UTC().Format(time.RFC3339),
 	}
 
@@ -40,4 +36,5 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return 
 	}
+	w.WriteHeader(http.StatusOK)
 }

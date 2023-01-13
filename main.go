@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/abidkhan03/go_training/handler"
@@ -14,6 +14,6 @@ func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", handler.HelloHandler)
 
-	fmt.Println("Server is running on port ", PORT)
-	fmt.Println(http.ListenAndServe(PORT, r))
+	log.Println("Server is running on port ", PORT)
+	log.Println(http.ListenAndServe(PORT, r))
 }
