@@ -23,6 +23,7 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	var req Request
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		return 
 	}
 
@@ -34,7 +35,9 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return 
 	}
+
 	w.WriteHeader(http.StatusOK)
 }
