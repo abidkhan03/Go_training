@@ -36,9 +36,51 @@
 		{
 			"name": "CSV handler",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"handler/record.csv\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse CSV Handler",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"handler/record.csv\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/handler",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"handler"
+					]
+				}
 			},
 			"response": []
 		}

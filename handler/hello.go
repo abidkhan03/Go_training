@@ -9,6 +9,7 @@ import (
 
 type Request struct {
 	Name string `json:"name"`
+	Path string
 }
 
 type Response struct {

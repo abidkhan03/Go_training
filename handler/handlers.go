@@ -3,52 +3,50 @@
 // And return the data in file in json format.
 // Import `./csv` in handlers.go and use the method as `csv.ParseCsv`
 
-package csvhandler
+package handler
 
 import (
-	"github.com/abidkhan03/go_training/csv_handler/csv"
 	"encoding/json"
 	"fmt"
+	"github.com/abidkhan03/go_training/handler/csv"
 	"net/http"
 	"os"
-	"github.com/go-chi/chi/v5"
 )
 
-type Request struct {
+type request struct {
 	Path string `json:"path"`
 }
 
-type Response struct {
+type response struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
-}
-
-const PORT = "8000"
-
-func main() {
-	r := chi.NewRouter()
-	r.Post("/hello", handlers)
-	r.Post("/parse", ParseHandler)
-	fmt.Println("Server is running on port ", PORT)
-	http.ListenAndServe(PORT, r)
 }
 
 func handlers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var req Request
-	json.NewDecoder(r.Body).Decode(&req)
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		return 
+	}
 	defer r.Body.Close()
 	response := &Response{
 		Code:    200,
 		Message: "Welcome " + req.Path + "!",
 	}
-	json.NewEncoder(w).Encode(response)
+	er := json.NewEncoder(w).Encode(response)
+	if er != nil {
+		return 
+	}
 }
 
 func ParseHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var req Request
-	json.NewDecoder(r.Body).Decode(&req)
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		return 
+	}
 	defer r.Body.Close()
 	records, err := csv.ParseCsv(req.Path)
 	if err != nil {
@@ -62,6 +60,12 @@ func ParseHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// print the json data
 	fmt.Println(string(jsonData))
+
+	// return json data
+	_, err = w.Write(jsonData)
+	if err != nil {
+		return
+	}
 }
 
 // Path: csv/parse.go
