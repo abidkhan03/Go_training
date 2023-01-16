@@ -68,7 +68,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"path\": \"handler/record.csv\"\n}"
+					"raw": "{\n    \"path\": \"handler/handler.csv\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8000/handler",

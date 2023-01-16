@@ -1,71 +1,38 @@
-// Add a new route, which receives a local file path in json body.
-// Handler method should read and parse the CSV.
-// And return the data in file in json format.
-// Import `./csv` in handlers.go and use the method as `csv.ParseCsv`
 
 package handler
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/abidkhan03/go_training/handler/csv"
+	"github.com/abidkhan03/go_training/csv"
 	"net/http"
-	"os"
 )
 
-type request struct {
-	Path string `json:"path"`
-}
+func CsvHandler(w http.ResponseWriter, r *http.Request) {
 
-type response struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-}
-
-func handlers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var req Request
-	err := json.NewDecoder(r.Body).Decode(&req)
-	if err != nil {
-		return 
+	var filePath struct {
+		Path string `json:"path"`
 	}
-	defer r.Body.Close()
-	response := &Response{
-		Code:    200,
-		Message: "Welcome " + req.Path + "!",
-	}
-	er := json.NewEncoder(w).Encode(response)
-	if er != nil {
-		return 
-	}
-}
 
-func ParseHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var req Request
-	err := json.NewDecoder(r.Body).Decode(&req)
-	if err != nil {
-		return 
+	if r.Body == nil {
+		http.Error(w, "Please send a request body", http.StatusBadRequest)
+		return
 	}
-	defer r.Body.Close()
-	records, err := csv.ParseCsv(req.Path)
+	// decode the json request to filePath
+	err := json.NewDecoder(r.Body).Decode(&filePath)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
-	jsonData, err := json.Marshal(records)
+	// retrieve the data from the csv file
+	data, err := csv.CsvtoJson(filePath.Path)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
-	// print the json data
-	fmt.Println(string(jsonData))
-
-	// return json data
-	_, err = w.Write(jsonData)
+	// write the data to the response body as json data type and return the response
+	_, err = w.Write([]byte(data))
 	if err != nil {
 		return
 	}
 }
-
-// Path: csv/parse.go

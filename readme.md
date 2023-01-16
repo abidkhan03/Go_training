@@ -30,9 +30,6 @@ If permission is required then
 
 ```chmod +x scripts/run.sh```
 
-or 
-
-```go run main.go```
 
 In Postman: For testing the output of the server import the postman collection in the postman folder and run the test cases
 
