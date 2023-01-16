@@ -32,6 +32,15 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "CSV handler",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
 		}
 	]
 }
