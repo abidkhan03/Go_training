@@ -7,32 +7,33 @@ import (
 	"net/http"
 )
 
-func CsvHandler(w http.ResponseWriter, r *http.Request) {
+var CsvRequest struct{
+	Path string `json:"path"`
+}
+func Csv(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
-	var filePath struct {
-		Path string `json:"path"`
+
+	// decode the json request to filePath
+	err := json.NewDecoder(r.Body).Decode(&CsvRequest)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 
-	if r.Body == nil {
-		http.Error(w, "Please send a request body", http.StatusBadRequest)
-		return
-	}
-	// decode the json request to filePath
-	err := json.NewDecoder(r.Body).Decode(&filePath)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
 	// retrieve the data from the csv file
-	data, err := csv.CsvtoJson(filePath.Path)
+	data, err := csv.CsvtoJson(CsvRequest.Path)
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
 	// write the data to the response body as json data type and return the response
 	_, err = w.Write([]byte(data))
 	if err != nil {
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
