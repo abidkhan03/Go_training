@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/abidkhan03/go_training/handler"
-	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
+
+	"github.com/abidkhan03/go_training/handler"
+	"github.com/go-chi/chi/v5"
 )
 
 const PORT = ":8000"
