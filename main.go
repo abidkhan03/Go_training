@@ -8,6 +8,11 @@ import (
 )
 
 const PORT = ":8000"
+
+// main function starts the server and listens to the port
+// It creates a new router and adds the handler functions to the router
+// It logs the message that the server is running on the port
+// It logs the error if the server cannot be started
 func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", handler.HelloHandler)
