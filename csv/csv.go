@@ -39,22 +39,27 @@ func CsvtoJson(csvData string) (jsonData []byte, err error) {
 	// store the header of the csv file in a variable
 	header := rawCSVdata[0]
 
-
+	// loop through the data in the csv file onwards the header
 	for _, row := range rawCSVdata[1:] {
+		// create a new map to store the data in the json format
 		mp := make(map[string]string)
+		// loop through the rows of the csv file and store the data in the map
 		for j := range row {
 			mp[header[j]] = row[j]
-
 		}
+		// append the data to the data variable
 		data = append(data, mp)
 	}
 
+	// convert the data to json Marshal encoding and return an error
+	//if the data cannot be converted to json format
 	jsonData, err = json.Marshal(data)
 	if err != nil {
 		log.Println(err)
 		http.Error(nil, err.Error(), http.StatusNotAcceptable)
 		return
 	}
+	// return the data in json format or an error if the data cannot be written to the response body
 	return jsonData, nil
 
 }
