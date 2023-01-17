@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# if a user write -b or --build, then it build the project
+# if a user write -b or --build, then build the project
 if [ "$1" = "-b" ] || [ "$1" = "--build" ]; then
-    go build -o bin/server main.go
+    echo "Building project..."
+    ./scripts/build.sh
 fi
 
 ./bin/server
