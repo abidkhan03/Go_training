@@ -34,13 +34,13 @@
 			"response": []
 		},
 		{
-			"name": "CSV handler",
+			"name": "CsvToJson",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"path\": \"handler/record.csv\"\n}\n",
+					"raw": "{\n    \"path\": \"handler/handler.csv\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,29 +56,6 @@
 					"port": "8000",
 					"path": [
 						"parse"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Parse CSV Handler",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"path\": \"handler/handler.csv\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8000/handler",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"handler"
 					]
 				}
 			},
