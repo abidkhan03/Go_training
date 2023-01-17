@@ -11,7 +11,7 @@ const PORT = ":8000"
 func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", handler.HelloHandler)
-	r.Post("/handler", handler.Csv)
+	r.Post("/parse", handler.Csv)
 	log.Println("Server is running on port " + PORT)
 	log.Println(http.ListenAndServe(PORT, r))
 }
