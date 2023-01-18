@@ -42,16 +42,23 @@ func CsvtoJson(csvData string, hasHeaders bool) (jsonData []byte, err error) {
 	// store the header of the csv file in a variable
 	
 	columnName := "column"
+
+	// if the csv file has headers, store the data in a map with the header as the key
 	if hasHeaders  {
+		// header to store the headers of the csv file
 		header := rawCSVdata[0]
+		// loop through the data and store the data in a map with the header as the key
 		for _, row := range rawCSVdata[1:] {
+			// create a new map for each row of data
 			mp := make(map[string]string)
 			for j := range row {
+				// store the data in the map with the header as the key and the data as the value
 				mp[header[j]] = row[j]
 
 			}
 			data = append(data, mp)
 		}
+		// if the csv file does not have headers, store the data in a map with the column name as the key
 	} else {
 		header := make([]string, len(rawCSVdata[0]))
 		for i := range header {
@@ -66,11 +73,6 @@ func CsvtoJson(csvData string, hasHeaders bool) (jsonData []byte, err error) {
 			data = append(data, mp)
 		}
 	}
-
-
-
-
-
 
 	// convert the data to json Marshal encoding and return an error
 	//if the data cannot be converted to json format
