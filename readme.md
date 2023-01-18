@@ -21,6 +21,7 @@ If permission is required then
 
 ```chmod +x scripts/build.sh```
 
+
 #### Run
 
 ```./scripts/run.sh```
@@ -30,6 +31,9 @@ If permission is required then
 ```chmod +x scripts/run.sh```
 
 
+In Postman: For testing the output of the server import the postman collection in the postman folder and run the test cases
+
+
 
 ### Author 
-* **Abdullah Abid** - *Initial work* - [abidkhan03]
+* **Abdullah Abid** 

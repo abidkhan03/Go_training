@@ -32,6 +32,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "CsvToJson",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"path\": \"handler/handler.csv\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/parse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"parse"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
