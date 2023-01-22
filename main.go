@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
+	"fmt"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -35,4 +35,6 @@ func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
 	http.ListenAndServe(":8000", r)
+	
+	fmt.Println("Server is running on port 8000")
 }
