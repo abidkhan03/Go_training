@@ -35,6 +35,11 @@ func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
 	http.ListenAndServe(":8000", r)
-	
+
+	// r.GET("/object", GetObjects)
+	// r.GET("/object/:id", GetObject)
+	// r.POST("/object", CreateObject)
+	// r.PUT("/object/:id", UpdateObject)
+	// r.DELETE("/object/:id", DeleteObject)
 	fmt.Println("Server is running on port 8000")
 }
