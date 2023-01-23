@@ -6,6 +6,7 @@ import (
 	"time"
 	"fmt"
 	"github.com/go-chi/chi/v5"
+	"github.com/abidkhan03/go_training/db"
 )
 
 type Request struct {
@@ -32,10 +33,22 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	DB := db.Init()
+	h := db.New(DB)
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
-	http.ListenAndServe(":8000", r)
 
+
+	r.Get("/objects", h.GetAllObjects)
+	r.Get("/object/{id}", h.GetObjectByID)
+	r.Post("/addObject", h.CreateObject)
+	r.Patch("/updateObject/{id}", h.UpdateObjectByID)
+	r.Delete("/deleteObject/{id}", h.DeleteObjectByID)
+
+	err := http.ListenAndServe(":8000", r)
+	if err != nil {
+		return
+	}
 	// r.GET("/object", GetObjects)
 	// r.GET("/object/:id", GetObject)
 	// r.POST("/object", CreateObject)
