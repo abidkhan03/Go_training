@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/abidkhan03/go_training/db"
+	"github.com/go-chi/chi/v5"
 	"net/http"
 	"time"
-	"fmt"
-	"github.com/go-chi/chi/v5"
-	"github.com/abidkhan03/go_training/db"
 )
 
 type Request struct {
@@ -49,11 +49,6 @@ func main() {
 	if err != nil {
 		return
 	}
-	// r.GET("/object", GetObjects)
-	// r.GET("/object/:id", GetObject)
-	// r.POST("/object", CreateObject)
-	// r.PUT("/object/:id", UpdateObject)
-	// r.DELETE("/object/:id", DeleteObject)
 	fmt.Println("Server is running on port 8000")
 
 }
