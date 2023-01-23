@@ -1,24 +1,18 @@
 package db
 
 import (
-	"log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	_"gorm.io/driver/postgres"
 )
 
 var DB *gorm.DB
 var err error
-func Init() *gorm.DB {
-	dbURL := "postgres://postgres:admin123@localhost:5432/gorm"
 
-	DB, err = gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-
+func init() {
+	connStr := "host=localhost user=postgres password=admin123 dbname=gorm port=5432 sslmode=disable TimeZone=Asia/Karachi"
+	DB, err = gorm.Open(postgres.Open(connStr), &gorm.Config{})
 	if err != nil {
-		log.Fatalln(err)
+		panic(err)
 	}
-
-	DB.AutoMigrate(&Object{})
-
-	return DB
 }
-

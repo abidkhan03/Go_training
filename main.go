@@ -34,7 +34,7 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 
 const PORT = ":8000"
 func main() {
-	DB := db.Init()
+	DB := db.DB
 	h := db.New(DB)
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)

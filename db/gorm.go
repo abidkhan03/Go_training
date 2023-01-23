@@ -3,7 +3,8 @@ package db
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
+	// using go-chi
+	"github.com/go-chi/chi/v5"
 	"net/http"
 	"strconv"
 )
@@ -28,8 +29,8 @@ func (h handler)GetAllObjects(w http.ResponseWriter, r *http.Request) {
 
 func (h handler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
 	var object Object
-	vars := mux.Vars(r)
-	id := vars["id"]
+	vars := chi.URLParam(r, "id")
+	id := vars
 	if result := h.DB.First(&object, id); result.Error != nil {
 		fmt.Println(result.Error)
 	}
@@ -53,11 +54,8 @@ func (h handler) CreateObject(w http.ResponseWriter, r *http.Request) {
 
 func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 	// Read the id parameter
-	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
-
-	// Read request body
-
+	vars := chi.URLParam(r, "id")
+	id, _ := strconv.Atoi(vars)
 
 	var updatedObject Object
 	//json.Unmarshal(body, &updatedObject)
@@ -80,8 +78,8 @@ func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h handler) DeleteObjectByID(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	vars := chi.URLParam(r, "id")
+	id, _ := strconv.Atoi(vars)
 
 	var object Object
 	if result := h.DB.First(&object, id); result.Error != nil {
