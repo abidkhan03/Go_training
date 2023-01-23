@@ -32,12 +32,12 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
+const PORT = ":8000"
 func main() {
 	DB := db.Init()
 	h := db.New(DB)
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
-
 
 	r.Get("/objects", h.GetAllObjects)
 	r.Get("/object/{id}", h.GetObjectByID)
@@ -55,4 +55,5 @@ func main() {
 	// r.PUT("/object/:id", UpdateObject)
 	// r.DELETE("/object/:id", DeleteObject)
 	fmt.Println("Server is running on port 8000")
+
 }

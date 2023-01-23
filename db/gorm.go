@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -41,15 +39,8 @@ func (h handler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h handler) CreateObject(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
-
-	if err != nil {
-		log.Fatalln(err)
-	}
-
+	//defer r.Body.Close()
 	var object Object
-	json.Unmarshal(body, &object)
 	//json.NewDecoder(r.Body).Decode(&object)
 	if result := h.DB.Create(&object); result.Error != nil {
 		fmt.Println(result.Error)
@@ -66,15 +57,10 @@ func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(vars["id"])
 
 	// Read request body
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
 
 	var updatedObject Object
-	json.Unmarshal(body, &updatedObject)
+	//json.Unmarshal(body, &updatedObject)
 
 	var object Object
 
