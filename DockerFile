@@ -1,18 +1,18 @@
-## syntax=docker/dockerfile:1
-
-FROM golang:1.19.0-alpine3.14
-
-RUN mkdir /app
-## copy everything in the root directory
-## into our /app directory
-ADD . /app
-## We specify that we now wish to execute
-## any further commands inside our /app
-## directory
-WORKDIR /app
-## run go build to compile the binary
-## executable of our Go program
-RUN go build -o main
-## Our start command which kicks off
-## our newly created binary executable
-CMD ["/app/main"]
+### syntax=docker/dockerfile:1
+#
+#FROM golang:1.19.0-alpine3.14
+#
+#RUN mkdir /app
+### copy everything in the root directory
+### into our /app directory
+#ADD . /app
+### We specify that we now wish to execute
+### any further commands inside our /app
+### directory
+#WORKDIR /app
+### run go build to compile the binary
+### executable of our Go program
+#RUN go build -o main
+### Our start command which kicks off
+### our newly created binary executable
+#CMD ["/app/main"]

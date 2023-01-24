@@ -3,10 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/abidkhan03/go_training/db"
-	"github.com/go-chi/chi/v5"
+	"log"
 	"net/http"
 	"time"
+
+	"github.com/abidkhan03/go_training/db"
+	"github.com/go-chi/chi/v5"
 )
 
 type Request struct {
@@ -47,6 +49,7 @@ func main() {
 
 	err := http.ListenAndServe(":8000", r)
 	if err != nil {
+		log.Fatal()
 		return
 	}
 	fmt.Println("Server is running on port 8000")

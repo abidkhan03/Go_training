@@ -1,15 +1,5 @@
 version: "3.8"
 services:
-    web:
-        container_name: gorm
-        build: ./
-        ports:
-            - "8000:8000"
-        environment:
-            DD_DB_HOST: db
-        command: /server
-        depends_on:
-            - db
     db:
         container_name: gorm-db
         image: postgres:latest
@@ -21,5 +11,5 @@ services:
             POSTGRES_DB: postgres
         volumes:
             # this is where the data will be stored on the host
-            - ./init.sql:/docker-entrypoint-initrd.d/init.sql
+            - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
 
