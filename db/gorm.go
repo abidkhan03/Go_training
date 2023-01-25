@@ -41,7 +41,6 @@ func (h handler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h handler) CreateObject(w http.ResponseWriter, r *http.Request) {
-	//defer r.Body.Close()
 	var object Object
 	json.NewDecoder(r.Body).Decode(&object)
 	if result := h.DB.Create(&object); result.Error != nil {
@@ -60,14 +59,12 @@ func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 
 	var updatedObject Object
 	json.NewDecoder(r.Body).Decode(&updatedObject)
-	//json.Unmarshal(body, &updatedObject)
 
 	var object Object
 
 	if result := h.DB.First(&object, id); result.Error != nil {
 		fmt.Println(result.Error)
 	}
-
 
 	object.ID = updatedObject.ID
 	object.Name = updatedObject.Name
@@ -82,7 +79,6 @@ func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 
 func (h handler) DeleteObjectByID(w http.ResponseWriter, r *http.Request) {
 	vars := chi.URLParam(r, "id")
-	// decode the params
 	id, _ := strconv.Atoi(vars)
 
 	var object Object
