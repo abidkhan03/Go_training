@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/abidkhan03/go_training/jwt"
-	"github.com/go-chi/jwtauth"
 	"log"
 	"net/http"
+
+	"github.com/abidkhan03/go_training/jwt"
+	abc "github.com/abidkhan03/go_training/jwt"
+	"github.com/go-chi/jwtauth"
 
 	"github.com/abidkhan03/go_training/handler"
 	"github.com/go-chi/chi/v5"
@@ -18,14 +20,13 @@ const PORT = ":8000"
 // It logs the message that the server is running on the port
 // It logs the error if the server cannot be started
 
-
 func main() {
 	r := chi.NewRouter()
 	r.Post("/hello", handler.HelloHandler)
 	r.Post("/auth/signin", handler.SignIn)
 
 	r.Group(func(r chi.Router) {
-		r.Use(jwtauth.Verifier(jwt.TokenAuth))
+		r.Use(jwtauth.Verifier((*jwtauth.JWTAuth)(abc.TokenAuth)))
 		r.Use(jwt.Authenticator)
 
 		r.Post("/parse", handler.Csv)

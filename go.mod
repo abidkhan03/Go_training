@@ -3,6 +3,7 @@ module github.com/abidkhan03/go_training
 go 1.19
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi/v5 v5.0.8
 	github.com/go-chi/jwtauth v1.2.0
 	github.com/go-chi/jwtauth/v5 v5.1.0
