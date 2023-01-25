@@ -8,12 +8,6 @@ import (
 	"os"
 )
 
-// CsvtoJson function takes the path of the csv file and returns the data in json format
-// It takes the path of the csv file as a string and returns the data in json format as a string
-// It returns an error if the file is not found or the data is not in the correct format
-// It returns an error if the data cannot be converted to json format
-// It returns an error if the data cannot be written to the response body
-
 func CsvtoJson(csvData string, hasHeaders bool) (jsonData []byte, err error) {
 
 	// open the csv file and return an error if the file is not found
