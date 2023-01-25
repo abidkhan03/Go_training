@@ -1,19 +1,23 @@
 package db
 
 import (
+	"log"
+
 	"gorm.io/driver/postgres"
+	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	_"gorm.io/driver/postgres"
 )
 
 var DB *gorm.DB
-var err error
 
 func init() {
+	var err error
 	dbURL := "postgres://postgres:postgres@localhost:5432/postgres?dbname"
 
 	DB, err = gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		return
 	}
+	log.Println("Successfully connected to database...")
 }

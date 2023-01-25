@@ -21,6 +21,9 @@ If permission is required then
 
 ```chmod +x scripts/build.sh```
 
+While Building the Gorm API using Docker build command
+
+```docker-compose up -d```
 
 #### Run
 
