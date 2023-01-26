@@ -21,7 +21,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 
 	claims := &jwt.MapClaims{
 		"username": user.Username,
-		"exec":     time.Now().Add(time.Hour + time.Minute),
+		"exp":      time.Now().Add(time.Minute),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

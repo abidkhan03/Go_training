@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/go-chi/jwtauth/v5"
 )
@@ -29,12 +30,13 @@ func ValidateToken(next http.Handler) http.Handler {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
-		// check expiration time
-		// var expire_time = 300
-		// if claims["exec"].(int64) < int64(expire_time) {
-		// 	http.Error(w, "Unauthorized", http.StatusUnauthorized)
-		// 	return
-		// }
+
+		if claims["exp"].(time.Time).Before(time.Now()) {
+			http.Error(w, "Unauthorized or token Expired", http.StatusUnauthorized)
+			return
+		}
+
+		next.ServeHTTP(w, r)
 
 		if claims["username"] == "Ali" {
 			next.ServeHTTP(w, r)
