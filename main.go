@@ -9,7 +9,6 @@ import (
 
 	"github.com/abidkhan03/go_training/db"
 	handler "github.com/abidkhan03/go_training/handlers"
-	"github.com/abidkhan03/go_training/handlers/auth"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
@@ -75,12 +74,12 @@ func getRouter() *chi.Mux {
 
 func publicRoutes(r chi.Router) {
 	r.Post("/hello", handler.HelloHandler)
-	r.Post("/auth/signin", auth.SignIn)
+	r.Post("/auth/signin", handler.SignIn)
 }
 
 func protectedRoutes(r chi.Router) {
-	r.Use(jwtauth.Verifier(auth.TokenAuth))
-	r.Use(auth.ValidateToken)
+	r.Use(jwtauth.Verifier(handler.TokenAuth))
+	r.Use(handler.ValidateToken)
 	r.Post("/parse", handler.Csv)
 	DB := db.DB
 	h := handler.New(DB)
