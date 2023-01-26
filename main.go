@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/abidkhan03/go_training/db"
+	"github.com/abidkhan03/go_training/handler"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -35,9 +36,10 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 const PORT = ":8000"
+
 func main() {
 	DB := db.DB
-	h := db.New(DB)
+	h := handler.New(DB)
 	r := chi.NewRouter()
 	r.Post("/hello", HelloHandler)
 

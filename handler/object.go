@@ -1,4 +1,4 @@
-package db
+package handler
 
 import (
 	"encoding/json"
@@ -8,9 +8,18 @@ import (
 
 	"github.com/abidkhan03/go_training/db/models"
 	"github.com/go-chi/chi/v5"
+	"gorm.io/gorm"
 )
 
-func (h handler) GetAllObjects(w http.ResponseWriter, r *http.Request) {
+type ObjectHandler struct {
+	DB *gorm.DB
+}
+
+func New(db *gorm.DB) ObjectHandler {
+	return ObjectHandler{db}
+}
+
+func (h ObjectHandler) GetAllObjects(w http.ResponseWriter, r *http.Request) {
 	var objects []models.Object
 	if result := h.DB.Find(&objects); result.Error != nil {
 		// In case of error, response code should be according to the error and respond body should contain proper error message
@@ -24,7 +33,7 @@ func (h handler) GetAllObjects(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(objects)
 }
 
-func (h handler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
+func (h ObjectHandler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
 	var object models.Object
 	id := chi.URLParam(r, "id")
 	// validate the id and if it is nil, respond with a proper error message and error code
@@ -43,7 +52,7 @@ func (h handler) GetObjectByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(object)
 }
 
-func (h handler) CreateObject(w http.ResponseWriter, r *http.Request) {
+func (h ObjectHandler) CreateObject(w http.ResponseWriter, r *http.Request) {
 	var object models.Object
 	json.NewDecoder(r.Body).Decode(&object)
 	// object is empty or any field in the object is empty respond error message and error code
@@ -64,12 +73,12 @@ func (h handler) CreateObject(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(object)
 }
 
-func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
+func (h ObjectHandler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 	// Read the id parameter
 	vars := chi.URLParam(r, "id")
 	id, _ := strconv.Atoi(vars)
 	// validate the id
-	if id == 0 || id < 0 || id > len(chi.URLParam(r, "id")) {
+	if id == 0 {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`{"error":true, "message":"id is required"}`))
 		return
@@ -107,11 +116,11 @@ func (h handler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("Updated")
 }
 
-func (h handler) DeleteObjectByID(w http.ResponseWriter, r *http.Request) {
+func (h ObjectHandler) DeleteObjectByID(w http.ResponseWriter, r *http.Request) {
 	vars := chi.URLParam(r, "id")
 	id, _ := strconv.Atoi(vars)
 	// validate the id
-	if id == 0 || id < 0 || id > len(chi.URLParam(r, "id")) {
+	if id == 0 {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`{"error":true, "message":"id is not found..."}`))
 		return
