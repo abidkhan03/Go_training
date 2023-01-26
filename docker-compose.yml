@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+    db:
+        container_name: gorm-db
+        image: postgres:latest
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        volumes:
+            # this is where the data will be stored on the host
+            - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
+
