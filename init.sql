@@ -1,5 +1,5 @@
-CREATE TABLE objects (
+CREATE TABLE objects IF NOT EXISTS (
     id serial PRIMARY KEY NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(250) NOT NULL
+    name varchar(50) NOT NULL,
+    description varchar(250) NOT NULL
 );
