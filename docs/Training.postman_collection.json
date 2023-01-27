@@ -7,6 +7,238 @@
 	},
 	"item": [
 		{
+			"name": "Object",
+			"item": [
+				{
+					"name": "Add Object",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzQ3MzgwMTgsInVzZXJuYW1lIjoiQWxpIn0.KoJeExs5dzf82q-_hdPKfxgYuP4tOF_QmWT2Xr5YqUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"M. Noman\",\n        \"description\": \"IT Specialist\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/addObject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"addObject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Object",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/object/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"5"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Objects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIzLTAxLTI2VDE2OjUzOjA3Ljc3OTQzOSswNTowMCIsInVzZXJuYW1lIjoiYWhtZWQifQ.44lISbSBPbkZPUCcRx25GPg7RllcIJpgdcd9l-iPdGk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/objects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Object",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzQ3MzgwMTgsInVzZXJuYW1lIjoiQWxpIn0.KoJeExs5dzf82q-_hdPKfxgYuP4tOF_QmWT2Xr5YqUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wasey\",\n    \"description\": \"Data Engineer\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/updateObject/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"updateObject",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Object",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzQ3MzgwMTgsInVzZXJuYW1lIjoiQWxpIn0.KoJeExs5dzf82q-_hdPKfxgYuP4tOF_QmWT2Xr5YqUE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/deleteObject/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"deleteObject",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var token = pm.response.headers.get(\"JWT-Token\");",
+									"console.log(pm.response.headers);",
+									"if (token !== undefined) {",
+									"    console.log(token);",
+									"    pm.collectionVariables.set(\"jwt-token\", token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Ali\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Other",
+			"item": [
+				{
+					"name": "CsvToJson",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzQ3MzgwMTgsInVzZXJuYW1lIjoiQWxpIn0.KoJeExs5dzf82q-_hdPKfxgYuP4tOF_QmWT2Xr5YqUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"path\": \"handlers/handler_with_headers.csv\",\n    \"header\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/parse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"parse"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Hello",
 			"request": {
 				"method": "POST",
@@ -33,100 +265,42 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "CsvToJson",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"path\": \"handler/handler.csv\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8000/parse",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"parse"
-					]
-				}
-			},
-			"response": []
-		},
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
 		{
-			"name": "Add Object",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"Name\": \"Abrar\",\n        \"Description\": \"Teacher\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8000/addObject",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"addObject"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "All Objects",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8000/objects",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"objects"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Object",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Update Object",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Object",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
+			"key": "jwt-token",
+			"value": ""
 		}
 	]
 }

@@ -26,7 +26,7 @@ func ValidateToken(next http.Handler) http.Handler {
 			return
 		}
 
-		if claims["username"] == "" {
+		if claims["username"] == "" || claims["username"] != "Ali" {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
@@ -35,8 +35,6 @@ func ValidateToken(next http.Handler) http.Handler {
 			http.Error(w, "Unauthorized or token Expired", http.StatusUnauthorized)
 			return
 		}
-
-		next.ServeHTTP(w, r)
 
 		if claims["username"] == "Ali" {
 			next.ServeHTTP(w, r)

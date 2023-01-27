@@ -21,7 +21,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 
 	claims := &jwt.MapClaims{
 		"username": user.Username,
-		"exp":      time.Now().Add(time.Minute),
+		"exp":      time.Now().Add(time.Hour),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -31,7 +31,6 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("JWT-Token", tokenString)
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(tokenString))
 }
