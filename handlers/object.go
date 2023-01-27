@@ -100,7 +100,7 @@ func (h ObjectHandler) UpdateObjectByID(w http.ResponseWriter, r *http.Request) 
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	object.ID = updatedObject.ID
+	
 	object.Name = updatedObject.Name
 	object.Description = updatedObject.Description
 
